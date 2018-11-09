@@ -61,6 +61,7 @@
 			<version>1.9.3</version>
 		</dependency>
 
+		<!-- https://github.com/eclipse20134/TrayNotification -->
 		<dependency>
 			<groupId>com.tray</groupId>
 			<artifactId>tray</artifactId>

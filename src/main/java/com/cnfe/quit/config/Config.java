@@ -42,7 +42,7 @@ public class Config {
 
 	/**
 	 * Get a configuration value as string.
-	 * 
+	 *
 	 * @param key
 	 *            key for the value that can be used from the {@link Keys} interface
 	 * @return value for the given key
@@ -53,7 +53,7 @@ public class Config {
 
 	/**
 	 * Set a value for a specific key in the configuration.
-	 * 
+	 *
 	 * @param key
 	 *            key for the value that can be used from the {@link Keys} interface
 	 * @param value
@@ -68,12 +68,13 @@ public class Config {
 
 	/**
 	 * This is class is used to save the keys for the configuration file.
-	 * 
+	 *
 	 * @author eclipse20134
 	 * @version 0.1
 	 */
 	public interface Keys {
 
 		String LANGUAGE = "quit.language";
+		String COUNTRY = "quit.country";
 	}
 }
