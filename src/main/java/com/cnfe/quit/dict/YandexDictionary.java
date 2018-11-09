@@ -1,4 +1,4 @@
-package com.cnfe.quit.model;
+package com.cnfe.quit.dict;
 
 import java.io.IOException;
 import java.net.URI;
