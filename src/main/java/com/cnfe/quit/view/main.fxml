@@ -16,8 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="root" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="500.0" prefWidth="500.0">
          <children>
@@ -32,7 +31,7 @@
               </rowConstraints>
                <children>
                   <ImageView pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Button fx:id="settingsButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+                  <Button fx:id="settingsButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@application.css" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
@@ -60,15 +59,15 @@
                <children>
                   <HBox spacing="10.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <TextArea fx:id="inputTextArea" promptText="enterValueString" style="-fx-border-width: 0;" />
+                        <TextArea fx:id="inputTextArea" promptText="enterValueString" styleClass="textArea" stylesheets="@application.css" />
                         <VBox spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Button fx:id="readOutButton" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;">
+                              <Button fx:id="readOutButton" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;" stylesheets="@application.css">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true" />
                                  </graphic>
                               </Button>
-                              <Button fx:id="deleteButton" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;">
+                              <Button fx:id="deleteButton" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
                                  <graphic>
                                     <ImageView pickOnBounds="true" preserveRatio="true" />
                                  </graphic>
@@ -79,7 +78,7 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;">
+                        <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="40.0">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true" />
                            </graphic>
@@ -96,7 +95,7 @@
                   <Pane fx:id="translationPane" prefHeight="200.0" />
                   <Separator prefWidth="200.0" />
                   <Label fx:id="alternateTranslationString" text="alternateTranslationsString" />
-                  <ListView fx:id="resultList" style="-fx-border-width: 0;">
+                  <ListView fx:id="resultList" style="-fx-border-width: 0;" styleClass="listView" stylesheets="@application.css">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
