@@ -59,6 +59,11 @@ public class YandexDictionary implements Dictionary {
 	private final UriTemplate template;
 
 	/**
+	 * http code if the request was successful
+	 */
+	private static final int STATUS_OK = 200;
+
+	/**
 	 * Initialize Dictionary
 	 */
 	public YandexDictionary() {
@@ -84,7 +89,6 @@ public class YandexDictionary implements Dictionary {
 			return langs.keySet().stream().map(Locale::new).collect(Collectors.toList());
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return Arrays.asList();
 		}
 	}
@@ -132,7 +136,7 @@ public class YandexDictionary implements Dictionary {
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).build();
 		HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-		if (response.statusCode() != 200)
+		if (response.statusCode() != STATUS_OK)
 			throw new IllegalArgumentException("call was not successful!");
 
 		return response;
