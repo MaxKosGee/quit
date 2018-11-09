@@ -105,7 +105,7 @@ public class YandexDictionary implements Dictionary {
 	}
 
 	@Override
-	public Optional<Locale> detachLanguage(String word) {
+	public Optional<Locale> detectLanguage(String word) {
 		try {
 			String uri = UriTemplate.buildFromTemplate(template).build().set(Keys.ACTION, "detect").set(Keys.TEXT, word)
 					.expand();

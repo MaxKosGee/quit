@@ -45,11 +45,11 @@ public interface Dictionary {
 	public List<String> translate(String word, String source, String target);
 
 	/**
-	 * Detach the language of a word.
+	 * Detect the language of a word.
 	 *
 	 * @param word
-	 *            word to detach the language
-	 * @return detached language as locale
+	 *            word to detect the language
+	 * @return detected language as locale
 	 */
-	public Optional<Locale> detachLanguage(String word);
+	public Optional<Locale> detectLanguage(String word);
 }
