@@ -1,5 +1,8 @@
 package com.cnfe.quit.config;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -27,8 +30,15 @@ public class Language {
 	private static final String BASE_NAME = "quit";
 
 	static {
-		CURRENT_LOCALE = new Locale(Config.get(Config.Keys.LANGUAGE), Config.get(Config.Keys.COUNTRY));
-		MESSAGES = ResourceBundle.getBundle(BASE_NAME, CURRENT_LOCALE);
+		try {
+			CURRENT_LOCALE = new Locale(Config.get(Config.Keys.LANGUAGE), Config.get(Config.Keys.COUNTRY));
+			File file = new File("lang");
+			URL[] urls = new URL[] { file.toURI().toURL() };
+			ClassLoader loader = new URLClassLoader(urls);
+			MESSAGES = ResourceBundle.getBundle(BASE_NAME, CURRENT_LOCALE, loader);
+		} catch (Exception e) {
+			throw new RuntimeException("language bundle cannot be loaded!");
+		}
 	}
 
 	/**
