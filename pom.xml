@@ -33,6 +33,19 @@
 			<version>11.0.1</version>
 		</dependency>
 
+		<!-- https://github.com/damnhandy/Handy-URI-Templates -->
+		<dependency>
+			<groupId>com.damnhandy</groupId>
+			<artifactId>handy-uri-templates</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>com.tray</groupId>
 			<artifactId>tray</artifactId>
