@@ -76,5 +76,6 @@ public class Config {
 
 		String LANGUAGE = "quit.language";
 		String COUNTRY = "quit.country";
+		String DEFAULTTARGETLANGUAGE = "quit.defaultTargetLanguage";
 	}
 }
