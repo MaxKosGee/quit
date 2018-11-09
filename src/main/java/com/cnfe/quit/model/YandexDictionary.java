@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.cnfe.quit.config.Config;
 import com.damnhandy.uri.template.UriTemplate;
 import com.jayway.jsonpath.JsonPath;
 
@@ -76,8 +77,8 @@ public class YandexDictionary implements Dictionary {
 	@Override
 	public List<Locale> getAllLanguages() {
 		try {
-			String uri = UriTemplate.buildFromTemplate(template).build().set(Keys.ACTION, "getLangs").set(Keys.UI, "en")
-					.expand();
+			String uri = UriTemplate.buildFromTemplate(template).build().set(Keys.ACTION, "getLangs")
+					.set(Keys.UI, Config.get(Config.Keys.LANGUAGE)).expand();
 
 			HttpResponse<String> response = sendRequest(uri);
 
