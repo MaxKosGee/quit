@@ -1,3 +1,12 @@
-.root {
-	-fx-padding: 0; 	
+.button {
+}
+
+.listView {
+	-fx-box-border: transparent;
+	-fx-background-color: transparent;
+}
+
+.textArea {
+	-fx-box-border: transparent;
+	-fx-background-color: transparent;
 }

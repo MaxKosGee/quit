@@ -19,7 +19,7 @@ public class QuitView extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add("application.css");
+		scene.getStylesheets().add("/com/cnfe/quit/view/application.css");
 
 		stage.setScene(scene);
 		stage.show();
