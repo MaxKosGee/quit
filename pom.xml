@@ -25,5 +25,20 @@
 			<artifactId>javafx-controls</artifactId>
 			<version>11.0.1</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>11.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tray</groupId>
+			<artifactId>tray</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/TrayNotification.jar</systemPath>
+		</dependency>
 	</dependencies>
 </project>
