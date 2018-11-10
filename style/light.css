@@ -91,3 +91,7 @@
 #copyTranslatedButton {
 	-fx-graphic: url("/copy.png");
 }
+
+#homeButton {
+	-fx-graphic: url("/home.png");
+}
