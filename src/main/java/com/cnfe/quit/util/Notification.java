@@ -1,5 +1,8 @@
 package com.cnfe.quit.util;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.util.Duration;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -12,6 +15,8 @@ import tray.notification.TrayNotification;
  * @version 0.1
  */
 public class Notification {
+
+	private static Logger log = LogManager.getLogger(Notification.class);
 
 	/**
 	 * time for the notification to be visible
@@ -27,6 +32,7 @@ public class Notification {
 	 *            description
 	 */
 	public static void info(String title, String message) {
+		log.info("show information message");
 		showDialog(title, message, NotificationType.INFORMATION);
 	}
 
@@ -39,6 +45,7 @@ public class Notification {
 	 *            description
 	 */
 	public static void error(String title, String message) {
+		log.info("show error message");
 		showDialog(title, message, NotificationType.ERROR);
 	}
 
@@ -51,6 +58,7 @@ public class Notification {
 	 *            description
 	 */
 	public static void notice(String title, String message) {
+		log.info("show notice message");
 		showDialog(title, message, NotificationType.NOTICE);
 	}
 
@@ -63,6 +71,7 @@ public class Notification {
 	 *            description
 	 */
 	public static void success(String title, String message) {
+		log.info("show success message");
 		showDialog(title, message, NotificationType.SUCCESS);
 	}
 

@@ -2,6 +2,9 @@ package com.cnfe.quit.util;
 
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 
@@ -14,6 +17,8 @@ import javafx.scene.input.ClipboardContent;
  */
 public class ClipboardTransfer {
 
+	private static Logger log = LogManager.getLogger(ClipboardTransfer.class);
+
 	/**
 	 * Set new string for the clipboard.
 	 *
@@ -21,6 +26,8 @@ public class ClipboardTransfer {
 	 *            new text for clipboard
 	 */
 	public static void set(String text) {
+		log.info("set the string '{}' to clipboard", text);
+
 		Clipboard clipboard = Clipboard.getSystemClipboard();
 		ClipboardContent content = new ClipboardContent();
 		content.putString(text);
@@ -33,11 +40,18 @@ public class ClipboardTransfer {
 	 * @return text from the clipboard
 	 */
 	public static Optional<String> get() {
+		log.info("get string from clipboard");
+
 		Clipboard clipboard = Clipboard.getSystemClipboard();
 		return clipboard.hasString() ? Optional.ofNullable(clipboard.getString()) : Optional.empty();
 	}
-	
+
+	/**
+	 * Clear the complete clipboard.
+	 */
 	public static void clear() {
+		log.info("clear clipboard");
+
 		Clipboard clipboard = Clipboard.getSystemClipboard();
 		clipboard.clear();
 	}

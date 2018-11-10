@@ -6,6 +6,9 @@ import java.net.URLClassLoader;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * This class is used to get a specific string for a language.
  *
@@ -13,6 +16,8 @@ import java.util.ResourceBundle;
  * @version 0.1
  */
 public class Language {
+
+	private static Logger log = LogManager.getLogger(Language.class);
 
 	/**
 	 * resource that handled the properties for one language
@@ -30,6 +35,8 @@ public class Language {
 	private static final String BASE_NAME = "quit";
 
 	static {
+		log.info("load language");
+
 		try {
 			CURRENT_LOCALE = new Locale(Config.get(Config.Keys.LANGUAGE), Config.get(Config.Keys.COUNTRY));
 			File file = new File("lang");
@@ -49,6 +56,7 @@ public class Language {
 	 * @return value
 	 */
 	public static String get(String key) {
+		log.info("get language value for {}", key);
 		return MESSAGES.getString(key);
 	}
 

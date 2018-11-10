@@ -15,6 +15,9 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.cnfe.quit.config.Config;
 import com.damnhandy.uri.template.UriTemplate;
 import com.jayway.jsonpath.JsonPath;
@@ -38,6 +41,8 @@ import net.minidev.json.JSONArray;
  * @version 0.1
  */
 public class YandexDictionary implements Dictionary {
+
+	private static Logger log = LogManager.getLogger(YandexDictionary.class);
 
 	/**
 	 * client api to send requests
@@ -68,6 +73,8 @@ public class YandexDictionary implements Dictionary {
 	 * Initialize Dictionary
 	 */
 	public YandexDictionary() {
+		log.info("initialize yandex dictionary");
+
 		this.template = UriTemplate.buildFromTemplate(BASIC_URI).path(Keys.ACTION).query(Keys.KEY).continuation(Keys.UI)
 				.continuation(Keys.TEXT).continuation(Keys.LANG).build().set(Keys.KEY, API_KEY);
 
@@ -76,6 +83,8 @@ public class YandexDictionary implements Dictionary {
 
 	@Override
 	public List<Locale> getAllLanguages() {
+		log.info("get all languages");
+
 		try {
 			String uri = UriTemplate.buildFromTemplate(template).build().set(Keys.ACTION, "getLangs")
 					.set(Keys.UI, Config.get(Config.Keys.LANGUAGE)).expand();
@@ -96,16 +105,20 @@ public class YandexDictionary implements Dictionary {
 
 	@Override
 	public List<String> translate(String word, String target) {
+		log.info("translate {} to {}", word, target);
 		return translateWord(word, target);
 	}
 
 	@Override
 	public List<String> translate(String word, String source, String target) {
+		log.info("translate {} from {} to {}", word, source, target);
 		return translateWord(word, String.format("%s-%s", source, target));
 	}
 
 	@Override
 	public Optional<Locale> detectLanguage(String word) {
+		log.info("detect language for {}", word);
+
 		try {
 			String uri = UriTemplate.buildFromTemplate(template).build().set(Keys.ACTION, "detect").set(Keys.TEXT, word)
 					.expand();
