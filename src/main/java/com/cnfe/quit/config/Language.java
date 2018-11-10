@@ -62,5 +62,6 @@ public class Language {
 		String ALTERNATIVE_TRANSLATIONS_STRING = "quit.alternateTranslationString";
 		String ENTER_VALUE_STRING = "quit.enterValueString";
 		String AUTO_DETECTION = "quit.autoDetection";
+		String NOT_PROCESSABLE_STRING = "quit.notProcessableString";
 	}
 }
