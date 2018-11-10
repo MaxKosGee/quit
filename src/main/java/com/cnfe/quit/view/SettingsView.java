@@ -19,6 +19,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -34,6 +35,9 @@ import javafx.util.Callback;
  * @version 0.1
  */
 public class SettingsView {
+	
+	@FXML
+	private Button homeButton;
 
 	@FXML
 	private Label languageString;
@@ -188,6 +192,8 @@ public class SettingsView {
 		cssString.setText(Language.get(Keys.CSS));
 		
 		cssBox.setItems(FXCollections.observableArrayList(loadAvailableCss()));
+		cssBox.getSelectionModel().select(cssBox.getItems()
+				.indexOf(Config.getString(Keys.CSS)));
 	}
 	
 	private void loadAutoTranslateBox() {
@@ -206,17 +212,13 @@ public class SettingsView {
 		File f = new File("lang");
 		return new ArrayList<File>(
 				Arrays.asList(f.listFiles()))
-				.stream().map(e -> new Locale(e.getName().substring(e.getName().indexOf("_"), e.getName().lastIndexOf("_"))))
+				.stream().map(e -> new Locale(e.getName().substring(e.getName().indexOf("_") + 1, e.getName().lastIndexOf("_"))))
 				.collect(Collectors.toList());
 	}
 	
 	private List<String> loadAvailableCss() {
-		File f = new File("com.cnfe.quit.view.style");
-		return new ArrayList<File>(Arrays.asList(f.listFiles())).stream().map(e -> e.getName()).collect(Collectors.toList());
-	}
-	
-	private List<String> loadAvailableTranslateLanguages() {
-		return dictionary.getAllLanguages().stream().sorted((v1, v2) -> v1.getLanguage().compareTo(v2.getLanguage())).map(e -> e.getLanguage()).collect(Collectors.toList());
+		File f = new File("style/");
+		return Arrays.asList(f.listFiles()).stream().map(e -> e.getName()).collect(Collectors.toList());
 	}
 	
 	private List<Locale> loadAllLanguages() {
@@ -294,9 +296,5 @@ public class SettingsView {
 		}
 	}
 	
-	@FXML
-	public void showHome() {
-		stage.setScene(mainScene);
-		stage.show();
-	}
+	
 }

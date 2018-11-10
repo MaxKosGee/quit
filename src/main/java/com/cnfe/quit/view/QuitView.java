@@ -1,5 +1,7 @@
 package com.cnfe.quit.view;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -32,6 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -85,27 +88,49 @@ public class QuitView extends Application {
 
 	private Locale currentLanguage;
 	
-	private Scene settingsScene;
+	private VBox settingsScene;
 	
-	private Stage stage;
+	private Stage primaryStage;
+	
+	private VBox rootLayout;
+	
+	private Scene scene;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
 		
-		this.stage = stage;
+		this.primaryStage = stage;
 		
-		Image logo = new Image(getClass().getResourceAsStream("/logo.png"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+		rootLayout = (VBox) loader.load();
 
-		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-		settingsScene = FXMLLoader.load(getClass().getResource("settings.fxml"));
+		scene = new Scene(rootLayout);
+		scene.getStylesheets().add(new File("style/" + Config.getString(Keys.CSS)).toURI().toURL().toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+	
+	@FXML
+	public void showSettings() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("settings.fxml"));
+			settingsScene = (VBox) loader.load();
 
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(Config.getString(Keys.CSS) + ".css");
+			Stage dialogStage = new Stage();
+			dialogStage.initOwner(primaryStage);
 
-		stage.getIcons().add(logo);
-		stage.setResizable(false);
-		stage.setScene(scene);
-		stage.show();
+			scene = new Scene(settingsScene);
+			scene.getStylesheets().add(new File("style/" + Config.getString(Keys.CSS)).toURI().toURL().toExternalForm());
+			dialogStage.setScene(scene);
+
+			SettingsView controller = loader.getController();
+
+			dialogStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@FXML
@@ -204,7 +229,6 @@ public class QuitView extends Application {
 
 				List<String> translation = translate();
 				showTranslations(translation);
-				System.out.println(translation);
 			} else {
 				setAutoDetection();
 				setLanguageOfComboBox(translatedComboBox, new Locale(Config.getString(Keys.DEFAULT_TARGET_LANGUAGE)));
@@ -264,7 +288,6 @@ public class QuitView extends Application {
 	}
 
 	private void addGridRow(GridPane gridPane, int row, String text) {
-		System.out.println(text);
 		gridPane.getChildren().clear();
 		TextArea area = new TextArea(text);
 		area.setMaxHeight((text.length() * 40) / 25);
@@ -304,12 +327,5 @@ public class QuitView extends Application {
 			return Optional.of(comboBox.getSelectionModel().selectedItemProperty().getValue());
 		else
 			return Optional.empty();
-	}
-	
-	@FXML
-	public void showSettings() {
-		stage.setScene(settingsScene);
-		stage.show();
-
 	}
 }

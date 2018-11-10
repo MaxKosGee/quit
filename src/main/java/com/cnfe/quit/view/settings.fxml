@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="433.0" maxWidth="500.0" minHeight="433.0" minWidth="500.0" prefHeight="433.0" prefWidth="500.0" styleClass="root" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cnfe.quit.view.QuitView">
+<VBox maxHeight="433.0" maxWidth="500.0" minHeight="433.0" minWidth="500.0" prefHeight="433.0" prefWidth="500.0" styleClass="root" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cnfe.quit.view.SettingsView">
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="500.0" prefWidth="500.0">
          <children>
@@ -28,12 +29,12 @@
               </rowConstraints>
                <children>
                   <ImageView fx:id="logoImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Button fx:id="settingsButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@application.css" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
                </children>
                <VBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </GridPane>
+            <Separator prefWidth="200.0" />
          </children>
       </VBox>
       <GridPane>
@@ -51,20 +52,20 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" />
-            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="languageString" />
-            <Label text="countryString" GridPane.rowIndex="1" />
-            <Label text="standardTranslateFromString" GridPane.rowIndex="2" />
-            <Label text="standardTranslateToString" GridPane.rowIndex="3" />
-            <Label text="cssString" GridPane.rowIndex="4" />
-            <Label text="autoCopyString" GridPane.rowIndex="6" />
-            <Label text="autoTranslateString" GridPane.rowIndex="5" />
-            <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="languageBox" onAction="#handleSetLanguage" prefWidth="235.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="countryBox" onAction="#handleSetCountry" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="standardTranslateFromBox" onAction="#handleSetStandardTranslateFrom" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="standardTranslateToBox" onAction="#handleSetStandardTranslateTo" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox fx:id="autoCopyBox" mnemonicParsing="false" onMouseClicked="#handleSetAutoCopy" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="cssBox" onAction="#handleSetCss" prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="languageString" text="languageString" />
+            <Label fx:id="countryString" text="countryString" GridPane.rowIndex="1" />
+            <Label fx:id="standardTranslateFromString" text="standardTranslateFromString" GridPane.rowIndex="2" />
+            <Label fx:id="standardTranslateToString" text="standardTranslateToString" GridPane.rowIndex="3" />
+            <Label fx:id="cssString" text="cssString" GridPane.rowIndex="4" />
+            <Label fx:id="autoCopyString" text="autoCopyString" GridPane.rowIndex="6" />
+            <Label fx:id="autoTranslateString" text="autoTranslateString" GridPane.rowIndex="5" />
+            <CheckBox fx:id="autoTranslateBox" mnemonicParsing="false" onMouseClicked="#handleSetAutoTranslate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
          <VBox.margin>
             <Insets left="15.0" right="15.0" />

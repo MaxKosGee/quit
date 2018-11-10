@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="root" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cnfe.quit.view.QuitView">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="root" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cnfe.quit.view.QuitView">
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="500.0" prefWidth="500.0">
          <children>
@@ -29,7 +29,7 @@
               </rowConstraints>
                <children>
                   <ImageView fx:id="logoImage" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                  <Button fx:id="settingsButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@application.css" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+                  <Button fx:id="settingsButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#showSettings" prefHeight="40.0" prefWidth="40.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
@@ -89,6 +89,7 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
             <VBox maxWidth="250.0" spacing="10.0">
                <children>
                   <GridPane fx:id="bestTranslation" alignment="TOP_CENTER" hgap="5.0" minHeight="50.0">
