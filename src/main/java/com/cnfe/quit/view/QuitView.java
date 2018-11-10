@@ -1,6 +1,7 @@
 package com.cnfe.quit.view;
 
 import java.sql.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -16,8 +17,13 @@ import com.cnfe.quit.dict.YandexDictionary;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,6 +33,12 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -68,6 +80,12 @@ public class QuitView extends Application {
 	@FXML
 	private Label alternateTranslationString;
 	
+	@FXML
+	private GridPane bestTranslation;
+	
+	@FXML 
+	private GridPane otherTranslations;
+	
 	private Dictionary dictionary;
 	
 	private List<Locale> allLanguages;
@@ -91,7 +109,7 @@ public class QuitView extends Application {
 		
 		dictionary = new YandexDictionary();
 		allLanguages = dictionary.getAllLanguages();
-		currentLanguage = new Locale(Config.get(Keys.LANGUAGE));
+		currentLanguage = new Locale(Config.getString(Keys.LANGUAGE));
 		this.allLanguages.sort((v1, v2) -> v1.getDisplayLanguage(currentLanguage).compareTo(v2.getDisplayLanguage(currentLanguage)));
 		
 		fillLabels();
@@ -118,11 +136,6 @@ public class QuitView extends Application {
 	@FXML
 	public void handleReadOut() {
 		//TODO 
-	}
-	
-	@FXML
-	public void handleCopyToClipboard() {
-		ClipboardTransfer.set("TODO");
 	}
 	
 	@FXML
@@ -174,36 +187,39 @@ public class QuitView extends Application {
 				
 				inputTextArea.setText(clipBoardString.get());
 				
-				if(detectedLanguage.get().getLanguage().equals(Config.get(Keys.DEFAULT_SOURCE_LANGUAGE))) {
-					setLanguageOfComboBox(translateComboBox, new Locale(Config.get(Keys.DEFAULT_TARGET_LANGUAGE)));
-					setLanguageOfComboBox(translatedComboBox, new Locale(Config.get(Keys.DEFAULT_TARGET_LANGUAGE)));
+				if(detectedLanguage.get().getLanguage().equals(Config.getString(Keys.DEFAULT_SOURCE_LANGUAGE))) {
+					setLanguageOfComboBox(translateComboBox, new Locale(Config.getString(Keys.DEFAULT_SOURCE_LANGUAGE)));
+					setLanguageOfComboBox(translatedComboBox, new Locale(Config.getString(Keys.DEFAULT_TARGET_LANGUAGE)));
 				} else {
 					setLanguageOfComboBox(translateComboBox, detectedLanguage.get());
-					setLanguageOfComboBox(translatedComboBox, new Locale(Config.get(Keys.DEFAULT_TARGET_LANGUAGE)));
+					setLanguageOfComboBox(translatedComboBox, new Locale(Config.getString(Keys.DEFAULT_SOURCE_LANGUAGE)));
 				}
 				
 //				ClipboardTransfer.clear();
 				List<String> translation = translate();
+				showTranslations(translation);
 				System.out.println(translation);
 			} else {
 				setAutoDetection();
-				setLanguageOfComboBox(translatedComboBox, new Locale(Config.get(Keys.DEFAULT_TARGET_LANGUAGE)));
+				setLanguageOfComboBox(translatedComboBox, new Locale(Config.getString(Keys.DEFAULT_TARGET_LANGUAGE)));
 				inputTextArea.setText(clipBoardString.get());
 			}
 		} else {
 			setAutoDetection();
-			setLanguageOfComboBox(translatedComboBox, new Locale(Config.get(Keys.DEFAULT_TARGET_LANGUAGE)));
+			setLanguageOfComboBox(translatedComboBox, new Locale(Config.getString(Keys.DEFAULT_TARGET_LANGUAGE)));
 		}
 	}
 	
 	private List<String> translate() {
 		
 			if(translateComboBox.getSelectionModel().getSelectedIndex() == -1) {
-				System.out.println(translateComboBox.getSelectionModel().getSelectedIndex());
+				Optional<Locale> detectedLanguage = dictionary.detectLanguage(getTranslationText());
+				if(detectedLanguage.isPresent()) {
+					setLanguageOfComboBox(translateComboBox, detectedLanguage.get());
+				}
 				return dictionary.translate(getTranslationText(), 
 						getSelectedLanguageCodeFromCombox(translatedComboBox).get().getLanguage());
 			} else {
-				System.out.println(translateComboBox.getSelectionModel().getSelectedIndex());
 				return dictionary.translate(getTranslationText(), 
 						getSelectedLanguageCodeFromCombox(translateComboBox).get().getLanguage(), 
 						getSelectedLanguageCodeFromCombox(translatedComboBox).get().getLanguage());
@@ -221,8 +237,53 @@ public class QuitView extends Application {
 		comboBox.getSelectionModel().select(position);
 	}
 	
+	/**
+	 * @param results
+	 */
 	private void showTranslations(List<String> results) {
-		// TODO show results
+		
+		if(results.size() > 0) {
+			addGridRow(bestTranslation, 0, results.get(0));
+			if(Config.getBoolean(Keys.AUTO_COPY_RESULT)) {
+				ClipboardTransfer.set(results.get(0));
+			}
+		}
+		
+		if(results.size() > 1) {
+			for(int i = 1; i < results.size(); i++) {
+				addGridRow(otherTranslations, i-1, results.get(i));
+			}
+		}
+		
+	}
+	
+	private void addGridRow(GridPane gridPane, int row, String text) {
+		System.out.println(text);
+		gridPane.getChildren().clear();
+		TextArea area = new TextArea(text);
+		area.setMaxHeight((text.length()*40)/25);
+		area.setPrefWidth(area.getMaxWidth());
+		area.setWrapText(true);
+		area.setEditable(false);
+		area.setDisable(true);
+		Button copyButton = new Button();
+		copyButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+               	ClipboardTransfer.set(text);
+            }
+        });
+		copyButton.setPrefHeight(40);
+		copyButton.setPrefWidth(40);
+		Button readOutButton = new Button();
+		readOutButton.setPrefHeight(40);
+		readOutButton.setPrefWidth(40);
+		gridPane.add(area, 0, 0);
+		gridPane.add(readOutButton, 1, 0);
+		gridPane.add(copyButton, 2, 0);
+		gridPane.setValignment(area, VPos.TOP);
+		gridPane.setValignment(copyButton, VPos.TOP);
+		gridPane.setValignment(readOutButton, VPos.TOP);
 	}
 	
 	private String getTranslationText() {
@@ -240,5 +301,33 @@ public class QuitView extends Application {
 		} else {
 			return Optional.empty();
 		}
+	}
+	
+	static class Translation extends HBox{
+		
+		HBox hbox = new HBox();
+		
+		TextArea translationArea = new TextArea();
+		
+		Button copyButton = new Button();
+		
+		Button readOutButton = new Button();
+
+		String lastTranslation;
+		
+		public Translation(String translation) {
+			super();
+			
+			translationArea.setText(translation);
+            hbox.getChildren().addAll(translationArea, copyButton, readOutButton);
+            HBox.setHgrow(translationArea, Priority.ALWAYS);
+            copyButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                   	ClipboardTransfer.set(translationArea.getText());
+                }
+            });
+		}
+
 	}
 }

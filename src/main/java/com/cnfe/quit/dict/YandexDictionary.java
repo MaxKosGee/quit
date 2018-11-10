@@ -87,7 +87,7 @@ public class YandexDictionary implements Dictionary {
 
 		try {
 			String uri = UriTemplate.buildFromTemplate(template).build().set(Keys.ACTION, "getLangs")
-					.set(Keys.UI, Config.get(Config.Keys.LANGUAGE)).expand();
+					.set(Keys.UI, Config.getString(Config.Keys.LANGUAGE)).expand();
 
 			HttpResponse<String> response = sendRequest(uri);
 

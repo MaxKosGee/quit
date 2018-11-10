@@ -53,9 +53,21 @@ public class Config {
 	 *            key for the value that can be used from the {@link Keys} interface
 	 * @return value for the given key
 	 */
-	public static String get(String key) {
+	public static String getString(String key) {
 		log.info("get configuration value for {}", key);
 		return CONFIG_ORIGIN.getString(key);
+	}
+	
+	/**
+	 * Get a configuration value as boolean.
+	 *
+	 * @param key
+	 *            key for the value that can be used from the {@link Keys} interface
+	 * @return value for the given key
+	 */
+	public static boolean getBoolean(String key) {
+		log.info("get configuration value for {}", key);
+		return CONFIG_ORIGIN.getBoolean(key);
 	}
 
 	/**
@@ -86,5 +98,6 @@ public class Config {
 		String COUNTRY = "quit.country";
 		String DEFAULT_TARGET_LANGUAGE = "quit.defaultTargetLanguage";
 		String DEFAULT_SOURCE_LANGUAGE = "quit.defaultSourceLanguage";
+		String AUTO_COPY_RESULT = "quit.autoCopyResult";
 	}
 }

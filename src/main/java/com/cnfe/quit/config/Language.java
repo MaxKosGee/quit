@@ -38,7 +38,7 @@ public class Language {
 		log.info("load language");
 
 		try {
-			CURRENT_LOCALE = new Locale(Config.get(Config.Keys.LANGUAGE), Config.get(Config.Keys.COUNTRY));
+			CURRENT_LOCALE = new Locale(Config.getString(Config.Keys.LANGUAGE), Config.getString(Config.Keys.COUNTRY));
 			File file = new File("lang");
 			URL[] urls = new URL[] { file.toURI().toURL() };
 			ClassLoader loader = new URLClassLoader(urls);
