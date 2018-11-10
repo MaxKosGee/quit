@@ -63,3 +63,31 @@
 	-fx-background-color: #033872;
 	-fx-border-color: transparent; 
 }
+
+#logoImage {
+	-fx-image: url("/logo.png");
+}
+
+#settingsButton {
+	-fx-graphic: url("/properties.png");
+}
+
+#translateButton {
+	-fx-graphic: url("/arrow.png");
+}
+
+#switchLanguagesButton {
+	-fx-graphic: url("/switch.png");
+}
+
+#readOutButton, #readOutTranslatedButton {
+	-fx-graphic: url("/speaker.png");
+}
+
+#removeButton {
+	-fx-graphic: url("/clear.png");
+}
+
+#copyTranslatedButton {
+	-fx-graphic: url("/copy.png");
+}
