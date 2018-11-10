@@ -1,8 +1,5 @@
 package com.cnfe.quit.view;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -17,10 +14,8 @@ import com.cnfe.quit.dict.YandexDictionary;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.VPos;
@@ -33,12 +28,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -92,13 +84,20 @@ public class QuitView extends Application {
 	
 	private Locale currentLanguage;
 	
+	private Scene settingsScene;
+	
+	private Stage stage;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 		
+		stage = new Stage();
+		
 		Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+		settingsScene = FXMLLoader.load(getClass().getResource("settings.fxml"));
 
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add("/com/cnfe/quit/view/application.css");
+		scene.getStylesheets().add(Config.getString(Keys.CSS) + ".css");
 
 		stage.setScene(scene);
 		stage.show();
@@ -180,7 +179,7 @@ public class QuitView extends Application {
 	private void selectComboBoxValues() {
 		Optional<String> clipBoardString = ClipboardTransfer.get();
 		
-		if(clipBoardString.isPresent()) {
+		if(clipBoardString.isPresent() && Config.getBoolean(Keys.AUTO_TRANSLATE_STRING)) {
 			
 			Optional<Locale> detectedLanguage = dictionary.detectLanguage(clipBoardString.get());
 			if(detectedLanguage.isPresent()) {
@@ -195,7 +194,6 @@ public class QuitView extends Application {
 					setLanguageOfComboBox(translatedComboBox, new Locale(Config.getString(Keys.DEFAULT_SOURCE_LANGUAGE)));
 				}
 				
-//				ClipboardTransfer.clear();
 				List<String> translation = translate();
 				showTranslations(translation);
 				System.out.println(translation);
@@ -263,7 +261,6 @@ public class QuitView extends Application {
 		TextArea area = new TextArea(text);
 		area.setMaxHeight((text.length()*40)/25);
 		area.setPrefWidth(area.getMaxWidth());
-		area.setWrapText(true);
 		area.setEditable(false);
 		area.setDisable(true);
 		Button copyButton = new Button();
@@ -303,31 +300,9 @@ public class QuitView extends Application {
 		}
 	}
 	
-	static class Translation extends HBox{
-		
-		HBox hbox = new HBox();
-		
-		TextArea translationArea = new TextArea();
-		
-		Button copyButton = new Button();
-		
-		Button readOutButton = new Button();
-
-		String lastTranslation;
-		
-		public Translation(String translation) {
-			super();
-			
-			translationArea.setText(translation);
-            hbox.getChildren().addAll(translationArea, copyButton, readOutButton);
-            HBox.setHgrow(translationArea, Priority.ALWAYS);
-            copyButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                   	ClipboardTransfer.set(translationArea.getText());
-                }
-            });
-		}
-
+	@FXML
+	public void showHome() {
+		stage.setScene(settingsScene);
+		stage.show();
 	}
 }
