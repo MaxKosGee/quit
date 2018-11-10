@@ -59,6 +59,8 @@ public class Language {
 	 * @version 0.1
 	 */
 	public interface Keys {
-
+		String ALTERNATIVE_TRANSLATIONS_STRING = "quit.alternateTranslationString";
+		String ENTER_VALUE_STRING = "quit.enterValueString";
+		String AUTO_DETECTION = "quit.autoDetection";
 	}
 }

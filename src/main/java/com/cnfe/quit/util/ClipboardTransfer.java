@@ -36,4 +36,9 @@ public class ClipboardTransfer {
 		Clipboard clipboard = Clipboard.getSystemClipboard();
 		return clipboard.hasString() ? Optional.ofNullable(clipboard.getString()) : Optional.empty();
 	}
+	
+	public static void clear() {
+		Clipboard clipboard = Clipboard.getSystemClipboard();
+		clipboard.clear();
+	}
 }

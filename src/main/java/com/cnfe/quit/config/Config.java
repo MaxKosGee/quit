@@ -76,7 +76,7 @@ public class Config {
 
 		String LANGUAGE = "quit.language";
 		String COUNTRY = "quit.country";
-		String DEFAULTTARGETLANGUAGE = "quit.defaultTargetLanguage";
-		String DEFAULTSOURCELANGUAGE = "quit.defaultSourceLanguage";
+		String DEFAULT_TARGET_LANGUAGE = "quit.defaultTargetLanguage";
+		String DEFAULT_SOURCE_LANGUAGE = "quit.defaultSourceLanguage";
 	}
 }
