@@ -21,7 +21,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.VPos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -29,11 +28,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -87,32 +83,34 @@ public class QuitView extends Application {
 	private List<Locale> allLanguages;
 
 	private Locale currentLanguage;
-	
+
 	private VBox settingsScene;
-	
+
 	private Stage primaryStage;
-	
+
 	private VBox rootLayout;
-	
+
 	private Scene scene;
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
-		
+
 		this.primaryStage = stage;
-		
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
 		rootLayout = (VBox) loader.load();
 
 		scene = new Scene(rootLayout);
 		scene.getStylesheets().add(new File("style/" + Config.getString(Keys.CSS)).toURI().toURL().toExternalForm());
+
+		primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	
+
 	@FXML
 	public void showSettings() {
-		
+
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("settings.fxml"));
 			settingsScene = (VBox) loader.load();
@@ -121,10 +119,11 @@ public class QuitView extends Application {
 			dialogStage.initOwner(primaryStage);
 
 			scene = new Scene(settingsScene);
-			scene.getStylesheets().add(new File("style/" + Config.getString(Keys.CSS)).toURI().toURL().toExternalForm());
+			scene.getStylesheets()
+					.add(new File("style/" + Config.getString(Keys.CSS)).toURI().toURL().toExternalForm());
 			dialogStage.setScene(scene);
 
-			SettingsView controller = loader.getController();
+			loader.getController();
 
 			dialogStage.showAndWait();
 		} catch (IOException e) {
@@ -208,9 +207,9 @@ public class QuitView extends Application {
 
 	private void selectComboBoxValues() {
 		Optional<String> clipBoardString = ClipboardTransfer.get();
-		
-		if(clipBoardString.isPresent() && Config.getBoolean(Keys.AUTO_TRANSLATE_STRING)) {
-			
+
+		if (clipBoardString.isPresent() && Config.getBoolean(Keys.AUTO_TRANSLATE_STRING)) {
+
 			Optional<Locale> detectedLanguage = dictionary.detectLanguage(clipBoardString.get());
 			if (detectedLanguage.isPresent()) {
 
@@ -293,7 +292,7 @@ public class QuitView extends Application {
 		area.setMaxHeight((text.length() * 40) / 25);
 		area.setPrefWidth(area.getMaxWidth());
 		area.setEditable(false);
-		
+
 		Button copyButton = new Button();
 		copyButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -301,7 +300,7 @@ public class QuitView extends Application {
 				ClipboardTransfer.set(text);
 			}
 		});
-		
+
 		copyButton.setId("copyTranslatedButton");
 		copyButton.setPrefHeight(40);
 		copyButton.setPrefWidth(40);
