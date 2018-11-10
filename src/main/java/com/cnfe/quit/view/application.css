@@ -1,12 +1,65 @@
+.root {
+	-fx-background-color: #aeaeae;
+}
+
 .button {
+	-fx-background-color: 
+        #033872,
+        linear-gradient(#194576 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #296ab4 45%, #3570b2 50%);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0, 1, 1;
+    -fx-border-color: transparent;
 }
 
-.listView {
+.button:pressed {
+	-fx-background-color: #033872;
+}
+
+.list-view {
 	-fx-box-border: transparent;
 	-fx-background-color: transparent;
 }
-
-.textArea {
+ 
+.text-area, .text-area .viewport, .text-area .content {
 	-fx-box-border: transparent;
-	-fx-background-color: transparent;
+	-fx-background-color: #c8c8c8;
+ 	-fx-wrap-text: true; 
+ 	-fx-text-fill: #033872;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #c8c8c8;
+    -fx-text-fill: #033872;
+    -fx-padding: 3 0 2 7;
+    -fx-font-weight: bold; 
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #aeaeae;
+}
+
+.combo-box .arrow {
+	-fx-background-color: #033872;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #c8c8c8;
+}
+
+.scroll-bar {
+	-fx-background-color: #aeaeae;
+}
+
+.scroll-bar .thumb {
+	-fx-background-color: #033872;
+}
+
+.scroll-bar .decrement-arrow, .scroll-bar .increment-arrow {
+	-fx-background-color: #033872;
+}
+
+.separator .line {
+	-fx-background-color: #033872;
+	-fx-border-color: transparent; 
 }
