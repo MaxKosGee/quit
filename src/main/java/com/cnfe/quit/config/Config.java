@@ -99,5 +99,7 @@ public class Config {
 		String DEFAULT_TARGET_LANGUAGE = "quit.defaultTargetLanguage";
 		String DEFAULT_SOURCE_LANGUAGE = "quit.defaultSourceLanguage";
 		String AUTO_COPY_RESULT = "quit.autoCopyResult";
+		String AUTO_TRANSLATE_STRING = "quit.autoTranslate";
+		String CSS = "quit.css";
 	}
 }

@@ -71,5 +71,13 @@ public class Language {
 		String ENTER_VALUE_STRING = "quit.enterValueString";
 		String AUTO_DETECTION = "quit.autoDetection";
 		String NOT_PROCESSABLE_STRING = "quit.notProcessableString";
+		
+		String LANGUAGE_String = "quit.language";
+		String COUNTRY_STRING = "quit.country";
+		String DEFAULT_TARGET_LANGUAGE_STRING = "quit.defaultTargetLanguage";
+		String DEFAULT_SOURCE_LANGUAGE_STRING = "quit.defaultSourceLanguage";
+		String AUTO_COPY_RESULT_STRING = "quit.autoCopyResult";
+		String AUTO_TRANSLATE_STRING = "quit.autoTranslate";
+		String CSS_STRING = "quit.css";
 	}
 }
