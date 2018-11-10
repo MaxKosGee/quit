@@ -293,7 +293,7 @@ public class QuitView extends Application {
 		area.setMaxHeight((text.length() * 40) / 25);
 		area.setPrefWidth(area.getMaxWidth());
 		area.setEditable(false);
-
+		
 		Button copyButton = new Button();
 		copyButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -301,11 +301,14 @@ public class QuitView extends Application {
 				ClipboardTransfer.set(text);
 			}
 		});
+		
+		copyButton.setId("copyTranslatedButton");
 		copyButton.setPrefHeight(40);
 		copyButton.setPrefWidth(40);
 		Button readOutButton = new Button();
 		readOutButton.setPrefHeight(40);
 		readOutButton.setPrefWidth(40);
+		readOutButton.setId("readOutTranslatedButton");
 		gridPane.add(area, 0, 0);
 		gridPane.add(readOutButton, 1, 0);
 		gridPane.add(copyButton, 2, 0);
