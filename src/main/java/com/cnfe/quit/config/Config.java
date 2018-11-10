@@ -6,6 +6,8 @@ import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This class is used to configure the project with dynamic values.
@@ -14,6 +16,8 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
  * @version 0.1
  */
 public class Config {
+
+	private static Logger log = LogManager.getLogger(Config.class);
 
 	/**
 	 * parameters for the initializing of the builder
@@ -31,6 +35,8 @@ public class Config {
 	private static final Configuration CONFIG_ORIGIN;
 
 	static {
+		log.info("load configuration");
+
 		try {
 			BUILDER = new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
 					.configure(PARAMS.properties().setFileName("config/config.properties"));
@@ -48,6 +54,7 @@ public class Config {
 	 * @return value for the given key
 	 */
 	public static String get(String key) {
+		log.info("get configuration value for {}", key);
 		return CONFIG_ORIGIN.getString(key);
 	}
 
@@ -62,6 +69,7 @@ public class Config {
 	 *             configuration saving was not successful
 	 */
 	public static void set(String key, Object value) throws ConfigurationException {
+		log.info("set new value {} for {}", value, key);
 		CONFIG_ORIGIN.setProperty(key, value);
 		BUILDER.save();
 	}
