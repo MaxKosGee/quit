@@ -2,21 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="root" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cnfe.quit.view.QuitView">
+<VBox maxHeight="433.0" maxWidth="500.0" minHeight="433.0" minWidth="500.0" prefHeight="433.0" prefWidth="500.0" styleClass="root" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cnfe.quit.view.QuitView">
    <children>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="500.0" minWidth="500.0" prefWidth="500.0">
          <children>
@@ -34,85 +31,46 @@
                   <Button fx:id="settingsButton" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" stylesheets="@application.css" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
                </children>
                <VBox.margin>
-                  <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </GridPane>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <ComboBox fx:id="translateComboBox" maxHeight="40.0" maxWidth="205.0" minHeight="40.0" prefHeight="40.0" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="switchLanguagesButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#handleSwitchLanguages" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;" HBox.hgrow="ALWAYS">
-                     <graphic>
-                        <ImageView pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <ComboBox fx:id="translatedComboBox" maxHeight="40.0" maxWidth="205.0" minHeight="40.0" prefHeight="40.0" HBox.hgrow="ALWAYS" />
-               </children>
-               <padding>
-                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-               </padding>
-            </HBox>
          </children>
       </VBox>
-      <HBox maxHeight="300.0" maxWidth="500.0" minHeight="300.0" minWidth="500.0" prefHeight="300.0" prefWidth="500.0" spacing="10.0" VBox.vgrow="ALWAYS">
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="235.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="235.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <VBox maxWidth="250.0" spacing="10.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <HBox spacing="10.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <TextArea fx:id="inputTextArea" promptText="enterValueString" styleClass="textArea" stylesheets="@application.css" />
-                        <VBox spacing="10.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <Button fx:id="readOutButton" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#handleReadOut" prefHeight="40.0" prefWidth="40.0" style="-fx-border-width: 0;" stylesheets="@application.css">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true" />
-                                 </graphic>
-                              </Button>
-                              <Button fx:id="removeButton" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="40.0" prefWidth="40.0">
-                                 <graphic>
-                                    <ImageView pickOnBounds="true" preserveRatio="true" />
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Button fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleTranslate" prefHeight="40.0" prefWidth="40.0">
-                           <graphic>
-                              <ImageView pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-               <HBox.margin>
-                  <Insets left="15.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox maxWidth="250.0" spacing="10.0">
-               <children>
-                  <Pane fx:id="translationPane" prefHeight="200.0" />
-                  <Separator prefWidth="200.0" />
-                  <Label fx:id="alternateTranslationString" text="alternateTranslationsString" />
-                  <ListView fx:id="resultList" style="-fx-border-width: 0;" styleClass="listView" stylesheets="@application.css">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ListView>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </VBox>
+            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" />
+            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox prefWidth="235.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="languageString" />
+            <Label text="countryString" GridPane.rowIndex="1" />
+            <Label text="standardTranslateFromString" GridPane.rowIndex="2" />
+            <Label text="standardTranslateToString" GridPane.rowIndex="3" />
+            <Label text="cssString" GridPane.rowIndex="4" />
+            <Label text="autoCopyString" GridPane.rowIndex="6" />
+            <Label text="autoTranslateString" GridPane.rowIndex="5" />
+            <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
-         <padding>
-            <Insets bottom="10.0" top="10.0" />
-         </padding>
-      </HBox>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" />
+         </VBox.margin>
+      </GridPane>
+      <Pane VBox.vgrow="ALWAYS" />
       <Label alignment="CENTER" contentDisplay="CENTER" opacity="0.5" text="Powered by Yandex.Translate">
          <font>
             <Font size="9.0" />
