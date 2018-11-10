@@ -51,6 +51,7 @@
             </HBox>
          </children>
       </VBox>
+      <Separator prefWidth="200.0" />
       <HBox maxHeight="300.0" maxWidth="500.0" minHeight="300.0" minWidth="500.0" prefHeight="300.0" prefWidth="500.0" spacing="10.0" VBox.vgrow="ALWAYS">
          <children>
             <VBox maxWidth="250.0" spacing="10.0" HBox.hgrow="ALWAYS">
